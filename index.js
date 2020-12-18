@@ -16,6 +16,22 @@ const {
 	NODE_ENV,
 } = process.env;
 
+function executeJavaScriptFunction(webContents, f, args = []) {
+	const js = [
+		'(',
+		f.toString(),
+		')(',
+		...(
+			args
+				.map(argument => JSON.stringify(argument))
+				.join(',')
+		),
+		');',
+	].join('');
+
+	return webContents.executeJavaScript(js);
+}
+
 async function main() {
 	const [ electronBlocker ] = await Promise.all([
 		ElectronBlocker.fromPrebuiltAdsAndTracking(fetch),
@@ -50,13 +66,28 @@ async function main() {
 	const { webContents } = browserWindow;
 
 	webContents.on('did-start-loading', () => {
-		const deviceLabel = 'YouTube TV on ' + os.hostname();
-		const js = outdent`
+		executeJavaScriptFunction(webContents, deviceLabel => {
 			window.tectonicConfig = window.tectonicConfig || {};
 			window.tectonicConfig.featureSwitches = window.tectonicConfig.featureSwitches || {};
-			window.tectonicConfig.featureSwitches.mdxDeviceLabel = ${JSON.stringify(deviceLabel)};
-		`;
-		webContents.executeJavaScript(js);
+			window.tectonicConfig.featureSwitches.mdxDeviceLabel = deviceLabel;
+		}, [
+			'YouTube TV on ' + os.hostname(),
+		]);
+	});
+
+	webContents.on('did-start-loading', () => {
+		executeJavaScriptFunction(webContents, () => {
+			let hideCursorTimeout;
+			const onMouseMove = () => {
+				document.body.style.setProperty('cursor', '');
+				clearTimeout(hideCursorTimeout);
+				hideCursorTimeout = setTimeout(() => {
+					document.body.style.setProperty('cursor', 'none', 'important');
+				}, 2000);
+			};
+			document.addEventListener('mousemove', onMouseMove);
+			onMouseMove();
+		});
 	});
 
 	webContents.on('before-input-event', (event, { type, key, shift, control, alt, meta }) => {
