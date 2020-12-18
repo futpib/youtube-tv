@@ -1,0 +1,31 @@
+{
+  "name": "youtube-tv",
+  "description": "Desktop YouTube TV app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=development electron .",
+    "test": "xo && nyc ava",
+    "build": "electron-packager --overwrite . youtube-tv --out dist --verbose"
+  },
+  "devDependencies": {
+    "ava": "^3.14.0",
+    "electron": "11",
+    "electron-packager": "^15.2.0",
+    "eslint-config-xo-overrides": "^1.4.0",
+    "nyc": "^15.1.0",
+    "xo": "^0.36.1"
+  },
+  "xo": {
+    "extends": [
+      "eslint-config-xo-overrides"
+    ]
+  },
+  "dependencies": {
+    "@cliqz/adblocker-electron": "^1.18.8",
+    "cross-fetch": "^3.0.6",
+    "outdent": "^0.8.0"
+  }
+}
