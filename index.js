@@ -1,3 +1,4 @@
+/* global window, document */
 
 const os = require('os');
 
@@ -5,8 +6,6 @@ const { app, session, BrowserWindow } = require('electron');
 
 const { ElectronBlocker } = require('@cliqz/adblocker-electron');
 const fetch = require('cross-fetch');
-
-const outdent = require('outdent');
 
 if (app.isPackaged) {
 	process.env.NODE_ENV = 'production';
@@ -85,6 +84,7 @@ async function main() {
 					document.body.style.setProperty('cursor', 'none', 'important');
 				}, 2000);
 			};
+
 			document.addEventListener('mousemove', onMouseMove);
 			onMouseMove();
 		});

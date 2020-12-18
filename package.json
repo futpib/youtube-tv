@@ -8,13 +8,15 @@
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "test": "xo && nyc ava",
-    "build": "electron-packager --overwrite . youtube-tv --out dist --verbose"
+    "build": "electron-packager --overwrite . youtube-tv --out dist --verbose",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "ava": "^3.14.0",
     "electron": "11",
     "electron-packager": "^15.2.0",
     "eslint-config-xo-overrides": "^1.4.0",
+    "husky": "5",
     "nyc": "^15.1.0",
     "xo": "^0.36.1"
   },
