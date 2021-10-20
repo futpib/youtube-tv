@@ -1,6 +1,7 @@
 /* global window, document */
 
 const os = require('os');
+const process = require('process');
 
 const { app, session, BrowserWindow } = require('electron');
 

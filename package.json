@@ -12,22 +12,25 @@
     "postinstall": "husky install"
   },
   "devDependencies": {
-    "ava": "^3.14.0",
-    "electron": "11",
-    "electron-packager": "^15.2.0",
-    "eslint-config-xo-overrides": "^1.4.0",
-    "husky": "5",
+    "ava": "^3.15.0",
+    "electron": "15.3.0",
+    "electron-packager": "^15.4.0",
+    "eslint-config-xo-overrides": "^1.5.0",
+    "husky": "7.0.2",
     "nyc": "^15.1.0",
-    "xo": "^0.36.1"
+    "xo": "^0.45.0"
   },
   "xo": {
     "extends": [
       "eslint-config-xo-overrides"
-    ]
+    ],
+    "rules": {
+      "unicorn/prefer-module": "off"
+    }
   },
   "dependencies": {
-    "@cliqz/adblocker-electron": "^1.18.8",
-    "cross-fetch": "^3.0.6",
+    "@cliqz/adblocker-electron": "^1.23.0",
+    "cross-fetch": "^3.1.4",
     "outdent": "^0.8.0"
   }
 }
