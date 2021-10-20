@@ -11,8 +11,11 @@ if (app.isPackaged) {
 	process.env.NODE_ENV = 'production';
 }
 
+const DEFAULT_USER_AGENT = 'Mozilla/5.0 (SMART-TV; Linux; Tizen 6.5) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/5.0 Chrome/85.0.4183.93 TV Safari/537.36';
+
 const {
 	NODE_ENV,
+	YOUTUBE_TV_USER_AGENT = DEFAULT_USER_AGENT,
 } = process.env;
 
 function executeJavaScriptFunction(webContents, f, args = []) {
@@ -43,7 +46,7 @@ async function main() {
 		callback({
 			requestHeaders: {
 				...details.requestHeaders,
-				'user-agent': 'Mozilla/5.0 (SMART-TV; Linux; Tizen 5.0) AppleWebKit/538.1 (KHTML, like Gecko) Version/5.0 NativeTVAds Safari/538.1',
+				'user-agent': YOUTUBE_TV_USER_AGENT,
 			},
 		});
 	});
