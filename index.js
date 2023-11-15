@@ -1,6 +1,5 @@
-/* global window, document */
+/* global document */
 
-const os = require('os');
 const process = require('process');
 
 const { app, session, BrowserWindow } = require('electron');
@@ -67,16 +66,6 @@ async function main() {
 	}
 
 	const { webContents } = browserWindow;
-
-	webContents.on('did-start-loading', () => {
-		executeJavaScriptFunction(webContents, deviceLabel => {
-			window.tectonicConfig = window.tectonicConfig || {};
-			window.tectonicConfig.featureSwitches = window.tectonicConfig.featureSwitches || {};
-			window.tectonicConfig.featureSwitches.mdxDeviceLabel = deviceLabel;
-		}, [
-			'YouTube TV on ' + os.hostname(),
-		]);
-	});
 
 	webContents.on('did-start-loading', () => {
 		executeJavaScriptFunction(webContents, () => {
